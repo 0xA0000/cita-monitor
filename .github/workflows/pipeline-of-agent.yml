@@ -36,8 +36,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          sudo -u root apt-get install -y docker docker-compose
+          sudo apt-get install -y docker docker-compose
+          sudo systemctl unmask docker.service
           sudo systemctl start docker.service
+          sudo docker --version
           sudo cp -v .env.example .env
           sudo docker-compose -f docker-compose-with-build.yml build
           sudo docker-compose -f docker-compose-with-build.yml push
