@@ -35,7 +35,8 @@ jobs:
         working-directory: agent
     steps:
       - uses: actions/checkout@v2
-      - run: apt-get install docker && apt-get install docker-compose
+      - run: id
+      - run: sudo -u root apt-get install -y docker docker-compose
       - run: docker-compose -f docker-compose-with-build.yml build
       - run: docker-compose -f docker-compose-with-build.yml push
 
