@@ -36,6 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
+          sudo apt-cache show docker
           sudo apt-get install -y docker docker-compose
           sudo systemctl unmask docker.service
           sudo systemctl start docker.service
