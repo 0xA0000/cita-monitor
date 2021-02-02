@@ -34,7 +34,7 @@ jobs:
         shell: bash
         working-directory: agent
     steps:
-      - uses: actions/checkout@v2with:
+      - uses: actions/checkout@v2
         with:
           submodules: recursive
       - run: |
