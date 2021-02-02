@@ -39,7 +39,6 @@ jobs:
           submodules: recursive
       - run: |
           sudo apt-get install -y docker-compose
-          sudo docker --version
           sudo cp -v .env.example .env
           sudo docker-compose -f docker-compose-with-build.yml build
           sudo docker-compose -f docker-compose-with-build.yml push
