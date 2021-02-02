@@ -35,9 +35,10 @@ jobs:
         working-directory: agent
     steps:
       - uses: actions/checkout@v2
-      - run: sudo -u root apt-get install -y docker docker-compose
-      - run: systemctl start docker.service
-      - run: cp -v .env.example .env
-      - run: docker-compose -f docker-compose-with-build.yml build
-      - run: docker-compose -f docker-compose-with-build.yml push
+      - run: |
+          sudo -u root apt-get install -y docker docker-compose
+          sudo systemctl start docker.service
+          sudo cp -v .env.example .env
+          sudo docker-compose -f docker-compose-with-build.yml build
+          sudo docker-compose -f docker-compose-with-build.yml push
 
