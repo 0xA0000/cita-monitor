@@ -27,8 +27,9 @@ jobs:
     needs: [test, code_audit]
     runs-on: ubuntu-latest
     defaults:
-      run: bash
-      working-directory: agent
+      run:
+        shell: bash
+        working-directory: agent
     steps:
       - run: apt-get install docker && apt-get install docker-compose
       - run: docker-compose -f docker-compose-with-build.yml build
