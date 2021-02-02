@@ -34,7 +34,9 @@ jobs:
         shell: bash
         working-directory: agent
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2with:
+        with:
+          submodules: recursive
       - run: |
           sudo apt-get install -y docker-compose
           sudo docker --version
