@@ -46,22 +46,23 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: "Building docker images on AMD64"
-        env:
-          DOCKERHUB_USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
-          DOCKERHUB_PASSWORD: "${{ secrets.DOCKERHUB_PASSWORD }}"
-        run: |
-          sudo apt-get install -y docker-compose
-          sudo cp -v .env.example .env
-          sudo docker-compose -f docker-compose-with-build.yml build
-          echo "${DOCKERHUB_PASSWORD}" | sudo docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-          sudo docker-compose -f docker-compose-with-build.yml push
+      # - name: "Building docker images on AMD64"
+      #   env:
+      #     DOCKERHUB_USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
+      #     DOCKERHUB_PASSWORD: "${{ secrets.DOCKERHUB_PASSWORD }}"
+      #   run: |
+      #     sudo apt-get install -y docker-compose
+      #     sudo cp -v .env.example .env
+      #     sudo docker-compose -f docker-compose-with-build.yml build
+      #     echo "${DOCKERHUB_PASSWORD}" | sudo docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+      #     sudo docker-compose -f docker-compose-with-build.yml push
       - name: "Build Docker on AARCH64"
         uses: uraimo/run-on-arch-action@v2.0.5
         with:
           arch: aarch64
           distro: ubuntu18.04
           run: |
+            id
             sudo apt-get install -y docker-compose
             sudo cp -v .env.example .env
             sudo docker-compose -f docker-compose-with-build.yml build
