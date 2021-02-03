@@ -7,24 +7,32 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v2
+      - name: "Setup environment"
+        uses: actions/setup-python@v2
         with:
           python-version: '3.5.4'
-      - uses: actions/checkout@v2
-      - run: pwd && ls -a -l
-      - run: make deps
-      - run: make test
+      - name: "Checking out code"
+        uses: actions/checkout@v2
+      - name: "Testing code"
+        run: |
+          pwd && ls -a -l
+          make deps
+          make test
         
   code_audit:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v2
+      - name: "Setup environment"
+        uses: actions/setup-python@v2
         with:
           python-version: '3.5.4'
-      - uses: actions/checkout@v2
-      - run: make deps
-      - run: make code-quality
+      - name: "Checking out code"
+        uses: actions/checkout@v2
+      - name: "Scaning code"
+        run: |
+          make deps
+          make code-quality
           
   build:
     needs: [test, code_audit]
@@ -34,13 +42,15 @@ jobs:
         shell: bash
         working-directory: agent
     steps:
-      - uses: actions/checkout@v2
+      - name: "Checking out code"
+        uses: actions/checkout@v2
         with:
           submodules: recursive
+      - name: "Building docker images"
         env:
           DOCKERHUB_USERNAME: "${{ secrets.DOCKERHUB_USERNAME }}"
           DOCKERHUB_PASSWORD: "${{ secrets.DOCKERHUB_PASSWORD }}"
-      - run: |
+        run: |
           sudo apt-get install -y docker-compose
           sudo cp -v .env.example .env
           sudo docker-compose -f docker-compose-with-build.yml build
