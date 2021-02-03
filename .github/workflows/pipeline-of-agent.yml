@@ -62,12 +62,12 @@ jobs:
           arch: aarch64
           distro: ubuntu18.04
           run: |
-            id
-            sudo apt-get install -y docker-compose
-            sudo cp -v .env.example .env
-            sudo docker-compose -f docker-compose-with-build.yml build
-            echo "${DOCKERHUB_PASSWORD}" | sudo docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
-            sudo docker-compose -f docker-compose-with-build.yml push
+            id && docker --version
+            apt-get install -y docker-compose
+            cp -v .env.example .env
+            docker-compose -f docker-compose-with-build.yml build
+            echo "${DOCKERHUB_PASSWORD}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            # sudo docker-compose -f docker-compose-with-build.yml push
             
             
             
