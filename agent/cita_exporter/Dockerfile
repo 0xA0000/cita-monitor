@@ -1,10 +1,10 @@
 # compile cita-cli with musl
 FROM rust:1.48 AS builder
 WORKDIR /build
-RUN curl -o musl-1.1.19.tar.gz https://www.musl-libc.org/releases/musl-1.1.19.tar.gz \
-	&& tar -xzvf musl-1.1.19.tar.gz \
-	&& cd musl-1.1.19/ \
-	&& ./configure && make && make install \
+RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz \
+	&& tar -xzf musl-1.1.19.tar.gz
+WORKDIR /build/musl-1.1.19
+RUN ./configure && make && make install \
 	&& ln -sf /usr/local/musl/bin/musl-gcc /usr/local/bin/musl-gcc
 COPY ./cita-cli.git /build/cita-cli.git
 WORKDIR /build/cita-cli.git/cita-cli
