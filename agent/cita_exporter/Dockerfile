@@ -2,7 +2,7 @@
 FROM rust:1.48 AS builder
 WORKDIR /build
 RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
-RUN tar -xzvf musl-1.1.19.tar.gz
+RUN tar -xf musl-1.1.19.tar.gz
 RUN cd musl-1.1.19/
 RUN ./configure
 RUN make
