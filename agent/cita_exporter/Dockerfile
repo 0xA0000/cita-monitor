@@ -4,7 +4,9 @@ WORKDIR /build
 RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
 RUN tar -xzvf musl-1.1.19.tar.gz
 RUN cd musl-1.1.19/
-RUN ./configure && make && make install
+RUN ./configure
+RUN make
+RUN make install
 RUN ln -sf /usr/local/musl/bin/musl-gcc /usr/local/bin/musl-gcc
 COPY ./cita-cli.git /build/cita-cli.git
 WORKDIR /build/cita-cli.git/cita-cli
