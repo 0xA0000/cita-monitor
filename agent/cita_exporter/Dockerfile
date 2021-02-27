@@ -1,9 +1,6 @@
 # compile cita-cli with musl
 FROM rust:1.48 AS builder
-ARG BUILDPLATFORM
 ARG TARGETPLATFORM
-RUN echo $TARGETPLATFORM
-RUN exit 246
 
 WORKDIR /
 RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
@@ -14,7 +11,7 @@ COPY ./cita-cli.git /cita-cli.git
 WORKDIR /cita-cli.git/cita-cli/
 RUN sh -x -e -c '\
     target="x86_64-unknown-linux-musl"; \
-	if [ "$BUILDPLATFORM" = "linux/arm64" ]; then target="aarch64-unknown-linux-musl"; fi; \
+	if [ "$TARGETPLATFORM" = "linux/arm64" ]; then target="aarch64-unknown-linux-musl"; fi; \
 	rustup target add "$target"; \
     CC=/usr/local/musl/bin/musl-gcc RUSTFLAGS="-A deprecated" cargo install --target "$target" --path .'
 
