@@ -1,6 +1,8 @@
 # compile cita-cli with musl
 FROM rust:1.48 AS builder
 ARG BUILDPLATFORM
+RUN echo $BUILDPLATFORM
+RUN exit 246
 
 WORKDIR /
 RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
