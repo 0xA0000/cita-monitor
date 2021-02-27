@@ -16,8 +16,8 @@ jobs:
       - name: "Testing code"
         run: |
           pwd && ls -a -l
-          make deps
-          make test
+          # make deps
+          # make test
         
   code_audit:
     needs: [test]
@@ -31,8 +31,9 @@ jobs:
         uses: actions/checkout@v2
       - name: "Scaning code"
         run: |
-          make deps
-          make code-quality
+          pwd && ls -a -l
+          # make deps
+          # make code-quality
           
   build:
     needs: [test, code_audit]
