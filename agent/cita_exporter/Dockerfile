@@ -1,7 +1,7 @@
 # compile cita-cli with musl
 FROM rust:1.48 AS builder
 ARG BUILDPLATFORM
-RUN echo $BUILDPLATFORM
+RUN echo $TARGETPLATFORM
 RUN exit 246
 
 WORKDIR /
