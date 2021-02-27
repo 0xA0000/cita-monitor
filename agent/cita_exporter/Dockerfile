@@ -3,8 +3,8 @@ FROM rust:1.48 AS builder
 ARG BUILDPLATFORM
 
 WORKDIR /
-RUN curl -o musl-1.1.19.tar.gz https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
-RUN tar -xzvf musl-1.1.19.tar.gz
+RUN wget https://www.musl-libc.org/releases/musl-1.1.19.tar.gz
+RUN tar -xzf musl-1.1.19.tar.gz
 RUN cd musl-1.1.19/ && ./configure && make && make install
 
 COPY ./cita-cli.git /cita-cli.git
