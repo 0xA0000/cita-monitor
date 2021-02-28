@@ -70,7 +70,7 @@ jobs:
                       --output "type=image,push=false" \
                       --file "${context}/${dockerfile}" \
                       --tag "${image}" \
-                      --platform "linux/amd64" \
+                      --platform "linux/arm64" \
                       "${context}"
               done          
             
