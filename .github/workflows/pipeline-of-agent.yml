@@ -67,10 +67,10 @@ jobs:
               | while IFS=$'\t' read -r dockerfile image context
               do
                   sudo docker buildx build \
-                      --output "type=image,push=true" \
+                      --output "type=image,push=false" \
                       --file "${context}/${dockerfile}" \
                       --tag "${image}" \
-                      --platform "linux/amd64,linux/arm64" \
+                      --platform "linux/amd64" \
                       "${context}"
               done          
             
